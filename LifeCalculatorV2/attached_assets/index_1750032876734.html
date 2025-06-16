@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Expectancy Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen">
+            <div class="welcome-content">
+                <h1>Life Expectancy Calculator</h1>
+                <p>Discover your personalized life expectancy with our comprehensive 13-question assessment based on scientific research and validated risk factors.</p>
+                <div class="welcome-features">
+                    <div class="feature">
+                        <h3>Comprehensive Assessment</h3>
+                        <p>13 carefully selected questions covering lifestyle, health, and demographic factors</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Scientific Accuracy</h3>
+                        <p>Based on Cox proportional hazards model with validated risk coefficients</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Personalized Results</h3>
+                        <p>Detailed analysis with confidence intervals and health recommendations</p>
+                    </div>
+                </div>
+                <button class="btn btn--primary btn--lg" onclick="startAssessment()">Begin Assessment</button>
+                <p class="disclaimer">This calculator provides estimates for educational purposes only and should not replace professional medical advice.</p>
+            </div>
+        </div>
+
+        <!-- Assessment Screen -->
+        <div id="assessment-screen" class="screen hidden">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span class="progress-text">Question <span id="current-question">1</span> of 13</span>
+            </div>
+
+            <div class="question-container">
+                <div class="question-content">
+                    <h2 id="question-title"></h2>
+                    <p id="question-description" class="question-desc"></p>
+                    <div id="question-input"></div>
+                    <div class="validation-message" id="validation-error"></div>
+                </div>
+                <div class="question-navigation">
+                    <button class="btn btn--outline" id="prev-btn" onclick="previousQuestion()" disabled>Previous</button>
+                    <button class="btn btn--primary" id="next-btn" onclick="nextQuestion()">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen hidden">
+            <div class="results-container">
+                <h1>Your Life Expectancy Results</h1>
+                
+                <div class="results-grid">
+                    <div class="result-card primary-result">
+                        <h3>Remaining Life Expectancy</h3>
+                        <div class="big-number" id="remaining-years">--</div>
+                        <p>years remaining</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Expected Age at Death</h3>
+                        <div class="big-number" id="expected-age">--</div>
+                        <p>years old</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Confidence Range</h3>
+                        <div class="range-display" id="confidence-range">-- to --</div>
+                        <p>±15% confidence interval</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Remaining Heartbeats</h3>
+                        <div class="big-number" id="remaining-heartbeats">--</div>
+                        <p>estimated beats</p>
+                    </div>
+                </div>
+
+                <div class="risk-analysis">
+                    <h2>Risk Factor Analysis</h2>
+                    <div id="risk-factors-list"></div>
+                </div>
+
+                <div class="recommendations">
+                    <h2>Personalized Recommendations</h2>
+                    <div id="recommendations-list"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn--secondary" onclick="restartCalculator()">Calculate Again</button>
+                    <button class="btn btn--outline" onclick="printResults()">Print Results</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
