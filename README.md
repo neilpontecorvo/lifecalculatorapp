@@ -1,37 +1,42 @@
-# Life Calculator
+# Harmonic Mix
 
-This repository contains the source code for the **Life Calculator** application. The project is split into two main parts:
+Harmonic Mix is a Phase 1 Android app that opens directly to an interactive Camelot harmonic-mixing wheel.
 
-- **LifeCalculatorV2/** – the web client and server written with React, Express and TypeScript.
-- **MacOSApp/** – a Swift package containing a minimal macOS wrapper application. This wrapper loads the built web client using `WKWebView` so the project can be distributed as a native macOS app.
+![Screenshot placeholder](docs/screenshot-placeholder.png)
 
-## Running the Web Version
+## Phase 1 features
+- 24-sector programmatic Camelot wheel with outer major B and inner minor A rings.
+- Immediate touch and accessibility click selection.
+- Selected, compatible, and energy-boost states.
+- Canonical catalog for labels, hit testing, compatibility, semantics, and tests.
+- State restoration through ViewModel and SavedStateHandle.
+- No permissions, network, analytics, ads, media scanning, or audio analysis.
 
-1. Install dependencies:
-   ```bash
-   cd LifeCalculatorV2
-   npm install
-   ```
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   The server runs on port `5000`.
-3. Build for production:
-   ```bash
-   npm run build
-   ```
-   The client will be compiled to `client/dist`.
+## Architecture
+Single Android application module using Kotlin, Jetpack Compose, Material 3, StateFlow, and unidirectional data flow. Domain logic lives under `domain`; wheel rendering, hit testing, UI state, and ViewModel code live under `ui/wheel`.
 
-## Building the macOS App
+## Requirements
+JDK 21, Android SDK platform 36/build-tools 36.0.0, Gradle, and network access to Google Maven/Maven Central. In Codex containers, run `scripts/setup-codex-android.sh` if the SDK is missing.
 
-The `MacOSApp` directory is a Swift package that can be opened directly in Xcode. It contains a simple SwiftUI application that loads the `client/dist` files using `WKWebView`.
+## Build and test
+```bash
+./gradlew --version
+./gradlew testDebugUnitTest
+./gradlew lintDebug
+./gradlew assembleDebug
+./gradlew assembleDebugAndroidTest
+```
 
-Steps:
+Debug APK: `app/build/outputs/apk/debug/app-debug.apk`.
 
-1. Ensure the web client is built (`npm run build` as above).
-2. Open `MacOSApp/Package.swift` in Xcode.
-3. Add the contents of `LifeCalculatorV2/client/dist` to the `Resources` folder of the Xcode project (or adjust the paths in `ContentView.swift`).
-4. Build and run the app from Xcode.
+## Install
+```bash
+scripts/install-debug.sh [optional-adb-serial]
+scripts/verify-device.sh [optional-adb-serial]
+```
 
-This setup allows the web application to be bundled and distributed as a native macOS application.
+## Current limitations
+Phase 1 intentionally excludes audio analysis, BPM/key detection, playlists, networking, accounts, settings, notifications, and release signing. Physical Samsung Galaxy S26+ verification is pending local execution when a device is attached.
+
+## Extension points
+Future phases can add audio analysis, media-library integration, route planning, import/export, and release signing while retaining the canonical Camelot catalog and relation engine.

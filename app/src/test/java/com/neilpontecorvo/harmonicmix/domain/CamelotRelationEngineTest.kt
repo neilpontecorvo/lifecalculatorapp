@@ -1,0 +1,6 @@
+package com.neilpontecorvo.harmonicmix.domain
+import org.junit.Assert.*
+import org.junit.Test
+class CamelotRelationEngineTest { @Test fun everySelectionHasRequiredCounts(){ CamelotCatalog.keys.forEach{ k -> val r=CamelotRelationEngine.relationsFor(k.code); assertEquals(24,r.size); assertEquals(1,r.values.count{it==CamelotRelation.SELECTED}); assertEquals(5,r.values.count{it==CamelotRelation.COMPATIBLE}); assertEquals(3,r.values.count{it==CamelotRelation.ENERGY}); assertEquals(15,r.values.count{it==CamelotRelation.NEUTRAL}); assertEquals(CamelotRelation.SELECTED,r[k.code]); r.keys.forEach{ assertNotNull(CamelotCatalog.get(it)) } } }
+@Test fun examples(){ check("06A", listOf("05A","07A","06B","03B","09B"), listOf("08A","11A","01A")); check("01B", listOf("12B","02B","01A","10A","04A"), listOf("03B","06B","08B")); check("01A", listOf("12A","02A","01B","10B","04B"), listOf("03A","06A","08A")) }
+private fun check(sel:String, compatible:List<String>, energy:List<String>){ val r=CamelotRelationEngine.relationsFor(CamelotCode(sel)); assertEquals(CamelotRelation.SELECTED,r[CamelotCode(sel)]); compatible.forEach{assertEquals(it,CamelotRelation.COMPATIBLE,r[CamelotCode(it)])}; energy.forEach{assertEquals(it,CamelotRelation.ENERGY,r[CamelotCode(it)])} } }

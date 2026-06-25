@@ -1,16 +1,11 @@
-# Node
+.gradle/
+build/
+**/build/
+local.properties
+*.apk
+*.aab
+/tmp/
+.harmonic-mix-device/
+
 node_modules/
-/dist/
-LifeCalculatorV2/client/dist/
-
-# Swift Package Build artifacts
-.build/
-
-# macOS
-*.xcworkspace
-*.xcodeproj
-*.swiftpm
-DerivedData/
-
-# Others
-.DS_Store
+**/node_modules/
