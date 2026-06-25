@@ -1,0 +1,2 @@
+# Phase 1 Architecture
+Harmonic Mix uses one Android application module. `CamelotCatalog` is the single canonical source for all 24 keys. `CamelotRelationEngine` computes selected, compatible, energy, and neutral states using one wrap function. `WheelViewModel` exposes immutable `WheelUiState` through StateFlow and persists the selected code in SavedStateHandle. Compose draws the wheel from `WheelGeometry`, and hit testing uses the same geometric model.
